@@ -1,12 +1,149 @@
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>頁面標題</title>
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <h2>hello Hsinchu</h2><!-- 這是註解 -->
-        <h3>Hey pretty girl</h3>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 行動裝置支援 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Body Fat Calculator</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <style>
+        .buttom-box{
+            margin-top: 30px;
+        }
+        p {
+          color: blue;
+        }
+
+        #header a {
+          font-size: 150%;
+          background-color: yellow;
+          color: red;
+        }
+
+        #row label {
+          color: green;
+          font-weight: bold;
+        }
+    </style>
+    <script>
+        $(function(){
+            $("#calc2").click(function () {
+                var h =  $("#height").val();
+                var w =  $("#weight").val();
+                h = h/100;     <!-- Unit change from cm to m -->
+                if( h == '' ) {
+                    alert('請輸入身高');
+                } else if( w == '' ) {
+                    alert('請輸入體重');
+                } else if( h > 300 ) {
+                    alert('身高請輸入公分')
+                } else {
+                    var bmi = w / ( h * h );
+                    $('#result').val(bmi);
+                    $('#height').val('');
+                    $('#weight').val('');
+                }
+
+                var a =  $("#age").val();
+                var s =  $("#sex").val();
+
+                if( a == '' ) {
+                    alert('年齡');
+                } else if( s == '' ) {
+                    alert('請選擇性別');
+                } else {
+                    var bodyfat =( 1.2*bmi )+( 0.23*a-5.4 )-(10.8*s);
+                    $('#fat').val(bodyfat)
+                    $('#age').val('');
+                    $('#sex').val('');
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+
+<div id="header" class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><strong>&nbsp&nbsp&nbspHomework: BMI & Body Fat Calculator, developed by Horace. Created Date: 2021/02/14&nbsp&nbsp&nbsp</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    </nav>
+    <h3><br></h3>
+
+    <div id="row" class="row">
+        <div class="col-md-4 box">
+            <div class="form-group">
+                <label for="height">輸入身高(cm)</label>
+                <input type="number" class="form-control" id="height" placeholder="身高">
+            </div>
+        </div>
+        <div class="col-md-4 box">
+            <div class="form-group">
+                <label for="weight">輸入體重(kg)</label>
+                <input type="number" class="form-control" id="weight" placeholder="體重">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="result">您的BMI</label>
+                <input type="number" class="form-control" id="result" readonly="true">
+            </div>
+        </div>
+    </div>
+
+    <div id="row" class="row">
+        <div class="col-md-4 box">
+            <div class="form-group">
+                <label for="age">年齡</label>
+                <input type="number" class="form-control" id="age" placeholder="年齡">
+            </div>
+        </div>
+        <div class="col-md-4 box">
+            <label for="age">性別</label>
+            <select class="form-control" id="sex">
+                <option value="1">男</option>
+                <option value="0">女</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="fat">體脂肪率, %</label>
+                <input type="number" class="form-control" id="fat" readonly="true">
+            </div>
+        </div>
+        <div class="col-md-1 buttom-box">
+            <div class="form-group">
+                <button type="button" id="calc2" class="btn btn-primary">計算</button>
+            </div>
+        </div>
+
+    </div>
+    <p><br></p>
+    <p id="id01"><strong>*** Empowed by HTML, Javascript, CSS, jQuery, Bootstrap, and AJAX!!</strong></p>
+
+    <hr style="width:90%;text-align:left;margin-left:0">
+    <p><strong>Note 1:</strong> 身高體重指數（又稱身體質量指數，英文為Body Mass Index，簡稱BMI）是一個計算值</p>
+    <a href="https://www.top1health.com/Article/50807">
+    <img src="https://top1cdn.top1health.com/cdn/am/50807/117029.jpg">
+</a>
+    <p><strong>Note 2:</strong> 由於BMI沒有將體脂肪率計算在內，所以一個BMI超重的人，實際上可能並非肥胖。例如健身者，由於體重有高比例的肌肉，他的BMI可能會超過30。如果他們身體的脂肪比例很低，那就不需要減重。</p>
+    <a href="https://www.estimatebodyfat.com/body-fat-percentages-of-men-and-women-with-pictures-and-charts.html">
+    <img src="https://www.estimatebodyfat.com/static/images/bodyfatpercentagepictures.png">
+</div>
+
+
+</body>
 </html>
