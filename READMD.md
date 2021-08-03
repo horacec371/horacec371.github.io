@@ -5,5 +5,5 @@
 
 Wonderful!! We have successfully push our new update to github!! Awesome!!
 
-Click following link to enjoy my first web seb by github:
+Click following link to enjoy my first web site by github:
 https://horacec371.github.io/
